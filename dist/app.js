@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.port = exports.app = void 0;
+const express_1 = __importDefault(require("express"));
+const languagesRouter_1 = require("./routes/languagesRouter");
+const searchFormRouter_1 = require("./routes/searchFormRouter");
+const eventsRouter_1 = require("./routes/eventsRouter");
+const eventListsRouter_1 = require("./routes/eventListsRouter");
+exports.app = (0, express_1.default)();
+exports.port = process.env.PORT || 5001;
+exports.app.use(express_1.default.json());
+var cors = require('cors');
+exports.app.use(cors({ origin: true, credentials: true }));
+exports.app.use("/languages", (0, languagesRouter_1.getLanguagesRouter)());
+exports.app.use("/searchForm", (0, searchFormRouter_1.getSearchFormRouter)());
+exports.app.use("/events", (0, eventsRouter_1.getEventsRouter)());
+exports.app.use("/eventLists", (0, eventListsRouter_1.getEventListsRouter)());
